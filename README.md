@@ -1,7 +1,7 @@
-# Selenium-Webscraping-Example
+# Selenium-Financial-Blog-Webscraping
 
 ### Description
-In this tutorial we will build a web scraping program that will scrape a Github user profile and get the Repository names and the Languages for the pinned repositories.
+
 
 ### Resources
 We will leverage these Resources
