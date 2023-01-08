@@ -4,7 +4,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from time import sleep
-import json
+
+import csv
 
 option = webdriver.ChromeOptions()
 option.add_argument("--incognito")
@@ -34,39 +35,28 @@ article_date_element = browser.find_elements(By.XPATH,
                                              "//p[@class='post-date']")
 article_date = [x.text for x in article_date_element]
 
-file_name = "data-files/Frugal-Woods.json"
-file = open(file_name, 'wb')
+file_name = "data-files/financial-blogs-data/frugal-woods.csv"
 
-# Pair each title with its corresponding language using zip function and print each pair
-for title, date, href in zip(article_titles, article_date,
-                             article_titles_href):
-    browser.get(href)
-    try:
-        WebDriverWait(browser, timeout).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//p[@class='site-title']")))
-    except TimeoutException:
-        print("Timed out waiting for page to load")
-        browser.quit()
+header = ['title', 'url', 'date', 'publication', 'content']
 
-    article_content_element = browser.find_elements(
-        By.XPATH, "//div[@class='entry-inner']/p")
-    article_content = [x.text for x in article_content_element]
+with open(file_name, 'w', encoding='UTF8', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(header)
 
-    article_data.append({
-        'title': title,
-        'url': href,
-        'date': date,
-        'content': article_content
-    })
+    for title, date, href in zip(article_titles, article_date,
+                                 article_titles_href):
+        browser.get(href)
+        try:
+            WebDriverWait(browser, timeout).until(
+                EC.visibility_of_element_located(
+                    (By.XPATH, "//p[@class='site-title']")))
+        except TimeoutException:
+            print("Timed out waiting for page to load")
+            browser.quit()
 
-json_string = json.dumps(article_data)
-file.write(json_string.encode())
-file.close()
+        article_content_element = browser.find_elements(
+            By.XPATH, "//div[@class='entry-inner']/p")
+        article_content = [x.text for x in article_content_element]
 
-# TODO - find other sources we want to use
-# TODO - pull from Twitter
-# TODO - find some common stuff in the content
-# TODO - use near operators to find keywords
-# TODO - identify common keywords (wordcloud?)
-# TODO - weight by recency
+        article_data = [title, href, date, 'Choose Fi', article_content]
+        writer.writerow(article_data)
