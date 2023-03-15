@@ -1,3 +1,4 @@
 data-files
 chromedriver.exe
 .vscode
+**/*/__pycache__
