@@ -3,13 +3,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
-from dateutil.relativedelta import relativedelta
-from datetime import datetime
 import csv
 
 import utils.loadBrowser
 import utils.articleData
-
 
 # Chromedriver
 browser = utils.loadBrowser.browser

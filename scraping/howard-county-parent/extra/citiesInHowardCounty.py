@@ -1,0 +1,20 @@
+cities = [
+    'Annapolis Junction',
+    'Clarksville',
+    'Columbia',
+    'Cooksville',
+    'Dayton',
+    'Elkridge',
+    'Ellicott City',
+    'Fulton',
+    'Glenelg',
+    'Glenwood',
+    'Highland',
+    'Jessup',
+    'Laurel',
+    'Lisbon',
+    'Savage',
+    'West Friendship',
+    'Woodbine',
+    'Woodstock'
+]
